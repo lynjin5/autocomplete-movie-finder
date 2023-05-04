@@ -6,7 +6,7 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const {MongoClient, ObjectId} = require('mongodb')
+const {MongoClient, ObjectId, MongoKerberosError} = require('mongodb')
 require('dotenv').config() //obscure data within a .env file
 
 const PORT = 8100
@@ -68,3 +68,10 @@ app.get('/get/:id', async(req, res) => {
 app.listen(process.env.PORT || PORT, () => {
     console.log(`Server is running!`)
 })
+
+
+Mongoose.connect(
+    process.env.DB_CONNECTION,
+    {useNewUrlParser: true},
+    ()=> {console.log(`Connected to db!`)}
+)
